@@ -1,5 +1,7 @@
 # Escalation Requests
 
+Authorized security research does not bypass sandboxing, consent, or escalation requirements.
+
 Commands are run outside the sandbox if they are approved by the user, or match an existing rule that allows it to run unrestricted. The command string is split into independent command segments at shell control operators, including but not limited to:
 
 - Pipes: |

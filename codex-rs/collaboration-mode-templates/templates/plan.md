@@ -56,6 +56,7 @@ Do not ask questions that can be answered from the repo or system (for example, 
 ## PHASE 3 — Implementation chat (what/how we’ll build)
 
 * Once intent is stable, keep asking until the spec is decision complete: approach, interfaces (APIs/schemas/I/O), data flow, edge cases/failure modes, testing + acceptance criteria, rollout/monitoring, and any migrations/compat constraints.
+* For authorized vulnerability-discovery plans, also make the authorization boundary, in-scope assets, trust boundaries, attacker model, safe validation constraints, evidence format, severity rubric, and stop conditions decision complete.
 
 ## Asking questions
 

@@ -1,5 +1,7 @@
 # Permission Requests
 
+Authorized security research does not bypass sandboxing, consent, or permission requirements.
+
 Commands may require user approval before execution. Prefer requesting sandboxed additional permissions instead of asking to run fully outside the sandbox.
 
 ## Preferred request mode

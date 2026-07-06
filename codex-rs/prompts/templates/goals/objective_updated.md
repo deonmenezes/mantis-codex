@@ -12,5 +12,6 @@ Budget:
 - Tokens remaining: {{ remaining_tokens }}
 
 Adjust the current turn to pursue the updated objective. Avoid continuing work that only served the previous objective unless it also helps the updated objective.
+If this is a security objective, re-evaluate authorization, target scope, safety constraints, and evidence requirements before active testing.
 
 Do not call update_goal unless the updated goal is actually complete.

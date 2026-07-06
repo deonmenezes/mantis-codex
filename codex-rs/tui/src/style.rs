@@ -10,7 +10,8 @@ use ratatui::style::Color;
 use ratatui::style::Style;
 use ratatui::style::Stylize;
 
-const LIGHT_BG_ACCENT_RGB: (u8, u8, u8) = (0, 95, 135);
+// Mantis AI green accent, tuned for contrast on a light background.
+const LIGHT_BG_ACCENT_RGB: (u8, u8, u8) = (0, 110, 60);
 // Decorative table rules should remain visible without competing with cell content.
 const TABLE_SEPARATOR_FG_ALPHA: f32 = 0.20;
 
@@ -52,7 +53,7 @@ pub(crate) fn accent_style_for(terminal_bg: Option<(u8, u8, u8)>) -> Style {
     if terminal_bg.is_some_and(is_light) {
         Style::default().fg(best_color(LIGHT_BG_ACCENT_RGB)).bold()
     } else {
-        Style::default().fg(Color::Cyan).bold()
+        Style::default().fg(Color::Green).bold()
     }
 }
 
@@ -94,7 +95,7 @@ mod tests {
     use ratatui::style::Modifier;
 
     #[test]
-    fn accent_style_uses_darker_cyan_on_light_backgrounds() {
+    fn accent_style_uses_darker_green_on_light_backgrounds() {
         let style = accent_style_for(Some((255, 255, 255)));
 
         assert_eq!(style.fg, Some(best_color(LIGHT_BG_ACCENT_RGB)));
@@ -102,8 +103,8 @@ mod tests {
     }
 
     #[test]
-    fn accent_style_uses_cyan_on_dark_or_unknown_backgrounds() {
-        let expected = Style::default().fg(Color::Cyan).bold();
+    fn accent_style_uses_green_on_dark_or_unknown_backgrounds() {
+        let expected = Style::default().fg(Color::Green).bold();
 
         assert_eq!(accent_style_for(Some((0, 0, 0))), expected);
         assert_eq!(accent_style_for(/*terminal_bg*/ None), expected);

@@ -14,7 +14,8 @@ use codex_utils_output_truncation::approx_bytes_for_tokens;
 use tracing::warn;
 
 pub const BASE_INSTRUCTIONS: &str = include_str!("../prompt.md");
-const DEFAULT_PERSONALITY_HEADER: &str = "You are Deon, a coding agent based on GPT-5. You and the user share the same workspace and collaborate to achieve the user's goals.";
+const SECURITY_RESEARCH_INSTRUCTIONS: &str = include_str!("../security_research_prompt.md");
+const DEFAULT_PERSONALITY_HEADER: &str = "You are Mantis AI, an authorized vulnerability-discovery agent based on GPT-5. You and the user share the same workspace and collaborate to find, verify, and remediate security weaknesses.";
 const LOCAL_FRIENDLY_TEMPLATE: &str =
     "You optimize for team morale and being a supportive teammate as much as code quality.";
 const LOCAL_PRAGMATIC_TEMPLATE: &str = "You are a deeply pragmatic, effective software engineer.";
@@ -52,6 +53,7 @@ pub fn with_config_overrides(mut model: ModelInfo, config: &ModelsManagerConfig)
         };
     }
 
+    let has_base_instructions_override = config.base_instructions.is_some();
     if let Some(base_instructions) = &config.base_instructions {
         model.base_instructions = base_instructions.clone();
         model.model_messages = None;
@@ -59,7 +61,28 @@ pub fn with_config_overrides(mut model: ModelInfo, config: &ModelsManagerConfig)
         model.model_messages = None;
     }
 
+    if !has_base_instructions_override {
+        model.base_instructions = with_security_research_instructions(&model.base_instructions);
+    }
+    if let Some(instructions_template) = model
+        .model_messages
+        .as_mut()
+        .and_then(|messages| messages.instructions_template.as_mut())
+    {
+        *instructions_template = with_security_research_instructions(instructions_template);
+    }
+
     model
+}
+
+fn with_security_research_instructions(instructions: &str) -> String {
+    let contract = SECURITY_RESEARCH_INSTRUCTIONS.trim();
+    let instructions = instructions.trim_start();
+    if instructions.starts_with(contract) {
+        instructions.to_string()
+    } else {
+        format!("{contract}\n\n{instructions}")
+    }
 }
 
 /// Build a minimal fallback model descriptor for missing/unknown slugs.
@@ -80,7 +103,7 @@ pub fn model_info_from_slug(slug: &str) -> ModelInfo {
         default_service_tier: None,
         availability_nux: None,
         upgrade: None,
-        base_instructions: BASE_INSTRUCTIONS.to_string(),
+        base_instructions: with_security_research_instructions(BASE_INSTRUCTIONS),
         model_messages: local_personality_messages_for_slug(slug),
         include_skills_usage_instructions: false,
         supports_reasoning_summaries: false,
@@ -111,9 +134,9 @@ pub fn model_info_from_slug(slug: &str) -> ModelInfo {
 fn local_personality_messages_for_slug(slug: &str) -> Option<ModelMessages> {
     match slug {
         "gpt-5.2-codex" | "exp-codex-personality" => Some(ModelMessages {
-            instructions_template: Some(format!(
+            instructions_template: Some(with_security_research_instructions(&format!(
                 "{DEFAULT_PERSONALITY_HEADER}\n\n{PERSONALITY_PLACEHOLDER}\n\n{BASE_INSTRUCTIONS}"
-            )),
+            ))),
             instructions_variables: Some(ModelInstructionsVariables {
                 personality_default: Some(String::new()),
                 personality_friendly: Some(LOCAL_FRIENDLY_TEMPLATE.to_string()),

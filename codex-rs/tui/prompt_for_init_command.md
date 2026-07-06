@@ -39,3 +39,5 @@ Commit & Pull Request Guidelines
 - Outline pull request requirements (descriptions, linked issues, screenshots, etc.).
 
 (Optional) Add other sections if relevant, such as Security & Configuration Tips, Architecture Overview, or Agent-Specific Instructions.
+
+If the repository contains security-sensitive code or supports vulnerability research, add a concise "Authorized Security Testing" section covering allowed targets, non-destructive validation, secret handling, evidence storage, required security tests, and prohibited production-impacting techniques.

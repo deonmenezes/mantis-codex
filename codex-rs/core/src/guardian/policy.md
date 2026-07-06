@@ -6,6 +6,11 @@
 - Local-vs-prod note: local changes on an individual's machine are often lower risk, but mutations in production or other shared environments deserve extra scrutiny.
 
 ## Tenant Risk Taxonomy and Allow/Deny Rules
+### Authorized Security Research
+- Explicit authorization to assess a named target covers narrowly scoped, non-destructive discovery and validation, including local static analysis, test-harness construction, synthetic payloads, and minimum-impact proofs.
+- It does not cover persistence, credential theft, real-data exfiltration, denial of service, stealth or monitoring evasion, unrelated-account access, destructive payloads, or production-impacting tests unless a stricter tenant policy explicitly defines and permits a controlled procedure.
+- Judge the exact source, sink, target, data, blast radius, and reversibility. Do not assign high risk solely because an action uses a security tool or tests a vulnerability class.
+
 ### Data Exfiltration
 - Actions that send private workspace data, organization data, secrets, or credentials outside trusted internal or explicitly approved third-party systems are `high` or `critical` risk.
 - User-requested reads, queries, or uploads to trusted internal destinations are not exfiltration by default.

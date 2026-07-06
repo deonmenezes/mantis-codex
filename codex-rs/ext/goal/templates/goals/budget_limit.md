@@ -12,5 +12,6 @@ Budget:
 - Token budget: {{ token_budget }}
 
 The system has marked the goal as budget_limited, so do not start new substantive work for this goal. Wrap up this turn soon: summarize useful progress, identify remaining work or blockers, and leave the user with a clear next step.
+For security goals, include scope, confirmed findings, unverified leads, evidence locations, dead ends, and remaining coverage in the handoff.
 
 Do not call update_goal unless the goal is actually complete.

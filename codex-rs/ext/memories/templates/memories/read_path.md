@@ -48,6 +48,8 @@ Quick-pass budget:
 During execution: if you hit repeated errors, confusing behavior, or suspect
 relevant prior context, redo the quick memory pass.
 
+For authorized security research, prioritize memories that establish scope, trust boundaries, tested hypotheses, known dead ends, evidence locations, affected versions, and previous verifier results. Memory is not proof that authorization remains current or that a vulnerability still reproduces; verify both before active testing or reporting.
+
 How to decide whether to verify memory:
 
 - Consider both risk of drift and verification effort.

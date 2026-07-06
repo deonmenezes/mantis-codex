@@ -94,3 +94,12 @@ CHANGELOG.ignore.md
 # Python bytecode files
 __pycache__/
 *.pyc
+
+# Mantis canary tripwire alerts (runtime-generated, not source)
+.codex/mcp-servers/canary/alerts.log
+
+# Mantis findings store (per-run finding state, not source)
+.codex/findings/
+
+# oh-my-claudecode local session/orchestration state, not source
+.omc/

@@ -418,7 +418,7 @@ impl AuthModeWidget {
 
             let line2 = if is_selected {
                 Line::from(format!("     {description}"))
-                    .fg(Color::Cyan)
+                    .fg(Color::Green)
                     .add_modifier(Modifier::DIM)
             } else {
                 Line::from(format!("     {description}"))
@@ -579,9 +579,9 @@ impl AuthModeWidget {
             .dim(),
             "".into(),
             Line::from(vec![
-                "  Press ".fg(Color::Cyan),
+                "  Press ".fg(Color::Green),
                 self.confirm_binding().into(),
-                " to continue".fg(Color::Cyan),
+                " to continue".fg(Color::Green),
             ]),
         ];
 
@@ -656,7 +656,7 @@ impl AuthModeWidget {
                     .title("API key")
                     .borders(Borders::ALL)
                     .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Cyan)),
+                    .border_style(Style::default().fg(Color::Green)),
             )
             .render(input_area, buf);
 

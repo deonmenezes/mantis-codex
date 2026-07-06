@@ -14,17 +14,17 @@ use std::path::PathBuf;
 fn renders_sandbox_mode_text() {
     assert_eq!(
         sandbox_text(SandboxMode::WorkspaceWrite, NetworkAccess::Restricted),
-        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is restricted."
+        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is restricted. This access level does not expand the authorization boundary for security testing."
     );
 
     assert_eq!(
         sandbox_text(SandboxMode::ReadOnly, NetworkAccess::Restricted),
-        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted."
+        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted. Authorized security research remains subject to this read-only boundary."
     );
 
     assert_eq!(
         sandbox_text(SandboxMode::DangerFullAccess, NetworkAccess::Enabled),
-        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `danger-full-access`: No filesystem sandboxing - all commands are permitted. Network access is enabled."
+        "Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `danger-full-access`: No filesystem sandboxing - all commands are permitted. Network access is enabled. This access level does not expand the authorization boundary for security testing."
     );
 }
 

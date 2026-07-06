@@ -264,7 +264,7 @@ impl WidgetRef for &OssSelectionWidget<'_> {
             .enumerate()
             .map(|(idx, opt)| {
                 let style = if idx == self.selected_option {
-                    Style::new().bg(Color::Cyan).fg(Color::Black)
+                    Style::new().bg(Color::Green).fg(Color::Black)
                 } else {
                     Style::new().bg(Color::DarkGray)
                 };

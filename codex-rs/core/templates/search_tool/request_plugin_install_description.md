@@ -27,3 +27,5 @@ Workflow:
    - if the user did not finish, continue without that plugin or connector, and don't request it again unless the user explicitly asks for it.
 
 IMPORTANT: DO NOT call this tool in parallel with other tools.
+
+For authorized security research, installing a plugin does not expand target scope or authorize active testing. Apply the same authorization and non-destructive evidence requirements after installation.

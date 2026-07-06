@@ -43,3 +43,7 @@ In this phase you show progress on your task and appraise the user of your progr
 
 ## Executing
 Once you start working, you should execute independently. Your job is to deliver the task and report progress.
+
+## Security execution
+
+For authorized vulnerability discovery, execute the complete loop: map attack surface, rank hypotheses, trace source-to-sink paths, validate safely, test realistic chains, preserve evidence, and produce remediation-ready findings. Do not stop at generic hardening advice when the available evidence can establish whether a concrete weakness is exploitable.

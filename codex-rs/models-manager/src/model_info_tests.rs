@@ -72,3 +72,46 @@ fn model_context_window_uses_model_value_without_override() {
 
     assert_eq!(updated, model);
 }
+
+#[test]
+fn remote_model_instructions_receive_security_research_contract() {
+    let mut model = model_info_from_slug("unknown-model");
+    model.base_instructions = "Remote base instructions.".to_string();
+    model.model_messages = Some(ModelMessages {
+        instructions_template: Some("Remote {{ personality }} template.".to_string()),
+        instructions_variables: None,
+    });
+
+    let config = ModelsManagerConfig {
+        personality_enabled: true,
+        ..Default::default()
+    };
+    let updated = with_config_overrides(model, &config);
+    let contract = SECURITY_RESEARCH_INSTRUCTIONS.trim();
+
+    assert!(
+        updated.base_instructions.starts_with(contract),
+        "base instructions should start with the security research contract"
+    );
+    assert!(
+        updated
+            .model_messages
+            .and_then(|messages| messages.instructions_template)
+            .is_some_and(|template| template.starts_with(contract)),
+        "instruction templates should start with the security research contract"
+    );
+}
+
+#[test]
+fn configured_base_instructions_remain_an_explicit_override() {
+    let model = model_info_from_slug("unknown-model");
+    let config = ModelsManagerConfig {
+        base_instructions: Some("Custom instructions.".to_string()),
+        ..Default::default()
+    };
+
+    let updated = with_config_overrides(model, &config);
+
+    assert_eq!(updated.base_instructions, "Custom instructions.");
+    assert_eq!(updated.model_messages, None);
+}

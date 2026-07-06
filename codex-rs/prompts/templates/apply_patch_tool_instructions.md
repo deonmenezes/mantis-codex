@@ -67,6 +67,7 @@ It is important to remember:
 - You must include a header with your intended action (Add/Delete/Update)
 - You must prefix new lines with `+` even when creating a new file
 - File references can only be relative, NEVER ABSOLUTE.
+- For security fixes or proof harnesses, keep patches scoped, preserve evidence separately, add regression coverage for the violated invariant, and never embed live secrets or production data.
 
 You can invoke apply_patch like:
 
